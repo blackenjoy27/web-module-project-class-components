@@ -5,12 +5,12 @@ import Todo from "./Todo";
 
 
 const TodoList = props=>{
-    const {todolist} = props;
+    const {todolist, taskCompleted} = props;
     return (
         <div>
             {
                 todolist.map(todo=>{
-                    return <Todo key={todo.id} todo={todo}/>
+                    return <Todo key={todo.id} todo={todo} taskCompleted = {taskCompleted}/>
                 })
             }
         </div>

@@ -35,14 +35,30 @@ class App extends React.Component {
       todolist: [...this.state.todolist, newTodo]
     })
   }
+  taskCompleted = (id)=>{
+    const temp = this.state.todolist.map(todo=>{
+      if(todo.id === id){
+        return {
+          ...todo, completed: !todo.completed
+        }
+      }
+      return todo;
+    })
+    this.setState({todolist:temp});
+  }
+
+  clearComplete = ()=>{
+    const temp = this.state.todolist.filter(todo=>!todo.completed);
+    this.setState({todolist:temp});
+  }
   
   render() {
     return (
       <div>
         <h1>ToDo List: MVP</h1>
-          <TodoList todolist={this.state.todolist}/>
+          <TodoList taskCompleted = {this.taskCompleted} todolist={this.state.todolist}/>
           <TodoForm addTodo ={this.addTodo}/>
-        <button>Clear Completed</button>
+        <button onClick={this.clearComplete}>Clear Completed</button>
       </div>
     );
   }
